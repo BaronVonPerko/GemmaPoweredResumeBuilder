@@ -1,59 +1,103 @@
-# GemmaGenAiDemo
+# GemmaPoweredResumeBuilder
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.19.
+An intelligent, secure, and privacy-first resume optimization tool powered by Google Gemma. Build modern Angular applications running on top of local generative artificial intelligence.
 
-## Development server
+This application allows software engineers, developers, and professionals to input their existing resume bullet points or job experience descriptions and receive beautifully polished, high-impact, and action-oriented rewrites tailored specifically to tech industry standards.
 
-To start a local development server, run:
+---
+
+## Key Features
+
+- **Local GenAI Processing**: Completely private, secure, and offline. Your resume data never leaves your computer, as all generations are performed locally.
+- **Factual Integrity**: Built with strict constraints that forbid the AI from exaggerating, inventing, or fabricating experience or metrics. It preserves your exact facts while putting your best foot forward.
+- **Modern Angular Architecture**: Fully designed using modern Angular best practices, including:
+  - Responsive layout built with CSS transitions and fade-in animations.
+  - Signal-based state management (`signal()`, `computed()`) for maximum efficiency.
+  - Angular's built-in template control flow (`@if` / `@else`) for elegant rendering.
+- **Structured Routing (PersonalAISpecs)**: Contains persistent instructions, workflows, and specifications structured in the `PersonalAISpecs/` directory.
+
+---
+
+## How It Works
+
+GemmaPoweredResumeBuilder communicates directly with [Ollama](https://ollama.com/), a local LLM runner, to execute the `gemma4` model. The frontend app sends carefully crafted prompt instructions to Ollama's local generation endpoint to ensure that your experience is polished for tech hiring managers without compromising the truth.
+
+---
+
+## Getting Started
+
+Follow these steps to run the application locally.
+
+### Prerequisites
+
+1. Install [Node.js](https://nodejs.org/) (v18 or newer recommended).
+2. Install [Ollama](https://ollama.com/).
+3. Pull and run the `gemma4` model locally on your machine:
+   ```bash
+   ollama pull gemma4
+   ```
+
+### Installation
+
+1. Clone this repository to your local machine:
+   ```bash
+   git clone https://github.com/DeveloperMattC/GemmaPoweredResumeBuilder.git
+   cd GemmaPoweredResumeBuilder
+   ```
+
+2. Install the package dependencies:
+   ```bash
+   npm install
+   ```
+
+### Development Server
+
+Start a local development server:
 
 ```bash
+npm run start
+# or
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Once the server is running, open your web browser and navigate to `http://localhost:4200/`.
 
-## Code scaffolding
+### Run Unit Tests
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+To execute unit tests using the modern [Vitest](https://vitest.dev/) test runner, run:
 
 ```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
+npm run test
+# or
 ng test
 ```
 
-## Running end-to-end tests
+### Production Build
 
-For end-to-end (e2e) testing, run:
+To compile the application for production deployment, run:
 
 ```bash
-ng e2e
+npm run build
+# or
+ng build
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+The compiled build artifacts will be stored in the `dist/` directory.
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Workspace Specifications (PersonalAISpecs)
+
+This project contains persistent guidelines designed to keep AI assistants in sync with our development workflows. Inside the `PersonalAISpecs/` folder you will find:
+
+- **Workflows/**: Custom pipeline rules for Angular development (`angular-dev-flow.md`) and CI/CD PR babysitting workflows (`github-ci-flow.md`).
+- **Behaviors/**: Guidelines for AI logic and verification protocols (`interaction-style.md`).
+- **Rules/**: Code hygiene and strict communication boundaries (`angular-and-general-rules.md`).
+- **Personalities/**: Customized virtual personas, featuring `jarvis-personality.md` which is polite, formal, and references all specifications.
+- **ExternalSkill/**: Built-in context integrating the official [Angular Team Agent Skills](https://angular.dev/ai/agent-skills).
+
+---
+
+## License
+
+This project is licensed under the MIT License.

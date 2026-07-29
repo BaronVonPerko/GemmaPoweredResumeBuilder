@@ -1,0 +1,26 @@
+---
+description: Personal AI Specifications and Coding Rules for Gemma Gen AI Demo
+globs: **/*
+alwaysApply: true
+---
+
+# Personal AI Specifications
+
+All interactions, behaviors, workflows, and code generations in this repository must align with the global specifications defined in the PersonalAISpecs folder located in this workspace: `PersonalAISpecs/`.
+
+## Key Architectural Folders
+
+- **Workflows**: Defined in `PersonalAISpecs/Workflows/` (such as `angular-dev-flow.md` and `github-ci-flow.md`)
+- **Behaviors**: Defined in `PersonalAISpecs/Behaviors/`
+- **Rules**: Defined in `PersonalAISpecs/Rules/`
+- **Personalities**: Defined in `PersonalAISpecs/Personalities/` (such as `default-personality.md` and `jarvis-personality.md`)
+- **ExternalSkill**: Defined in `PersonalAISpecs/ExternalSkill/`
+- **Outputs**: Defined in `PersonalAISpecs/Outputs/`
+
+## Core Rules
+
+1. **Angular Standard**: Follow modern Angular conventions (Angular 21+).
+2. **Avoid ngif**: DO NOT use legacy directives like *ngIf, *ngFor, or *ngSwitch. Use the modern @if, @else, @for, and @switch built-in template syntax instead.
+3. **Favor Signals**: Prefer Angular Signals (signal, computed, effect, linkedSignal, resource) over Observables (RxJS) or traditional class property bindings for component state.
+4. **Dash Constraint**: NEVER use the en-dash character (U+2013) or em-dash character (U+2014) in your response, code, comments, or any outputs. Use only the standard ASCII hyphen (-).
+5. **Angular Skills**: Incorporate the official Angular Agent Skills (https://angular.dev/ai/agent-skills) defined in `PersonalAISpecs/ExternalSkill/angular-developer.md`.

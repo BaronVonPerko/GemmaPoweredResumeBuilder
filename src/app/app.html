@@ -1,5 +1,52 @@
-<button (click)="randomNameWithGemma()" [disabled]="loading()">generate name</button>
-@if (loading()) { <p>Generating… (first run may take a minute while gemma4 loads)</p> }
-@else if (name()) { <p>{{ name() }}</p> }
+<div class="container">
+  <header class="app-header">
+    <div class="logo">Gemma</div>
+    <span class="badge">Resume Optimizer</span>
+  </header>
+
+  <main class="card">
+    <h1 class="card-title">Resume Wording Improver</h1>
+    <p class="card-subtitle">Elevate your resume bullet points with high-impact, professional wording suggested by local Google Gemma model.</p>
+
+    <div class="form-group">
+      <label for="original-text-input">Original Resume Bullet or Phrase</label>
+      <textarea
+        id="original-text-input"
+        rows="4"
+        [value]="originalText()"
+        (input)="originalText.set($any($event.target).value)"
+        placeholder="e.g., I was in charge of managing the software developer team and helped them write code faster."
+        [disabled]="loading()"
+        class="text-input textarea-input"
+      ></textarea>
+    </div>
+
+    <div class="action-section">
+      <button
+        (click)="improveResumeWording()"
+        [disabled]="loading() || !originalText().trim()"
+        class="btn-primary"
+      >
+        @if (loading()) {
+          Optimizing...
+        } @else {
+          Improve Wording
+        }
+      </button>
+    </div>
+
+    @if (loading()) {
+      <div class="loader-container">
+        <div class="spinner"></div>
+        <p class="status-text">Optimizing... (this may take a minute while Gemma loads)</p>
+      </div>
+    } @else if (improvedText()) {
+      <div class="result-container">
+        <span class="result-label">Suggested Improvement:</span>
+        <blockquote class="generated-name resume-output">{{ improvedText() }}</blockquote>
+      </div>
+    }
+  </main>
+</div>
 
 <router-outlet />

@@ -4,6 +4,8 @@ An intelligent, secure, and privacy-first resume optimization tool powered by Go
 
 This application allows software engineers, developers, and professionals to input their existing resume bullet points or job experience descriptions and receive beautifully polished, high-impact, and action-oriented rewrites tailored specifically to tech industry standards.
 
+![Resume Wording Improver Screenshot](public/screenshot.png)
+
 ---
 
 ## Key Features

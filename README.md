@@ -32,9 +32,13 @@ Follow these steps to run the application locally.
 
 1. Install [Node.js](https://nodejs.org/) (v18 or newer recommended).
 2. Install [Ollama](https://ollama.com/).
-3. Pull and run the `gemma4` model locally on your machine:
+3. Pull the `gemma4` model locally on your machine:
    ```bash
    ollama pull gemma4
+   ```
+4. **CRITICAL REQUIREMENT**: You **MUST** ensure Ollama is actively running the `gemma4` model locally before starting the app or sending suggestions. Every time before you start the development server, run the model in your terminal:
+   ```bash
+   ollama run gemma4
    ```
 
 ### Installation

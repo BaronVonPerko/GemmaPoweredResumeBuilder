@@ -1,8 +1,8 @@
-# GemmaPoweredResumeBuilder
+# GemmaPoweredResumeBuilder (Firebase AI Logic)
 
-An intelligent, secure, and privacy-first resume optimization tool powered by Google Gemma. Build modern Angular applications running on top of local generative artificial intelligence.
+A hosted resume wording improver built with Angular and [Firebase AI Logic](https://firebase.google.com/docs/ai-logic). Paste a resume bullet, and Gemini rewrites it for tech recruiters without inventing facts, metrics, or technologies.
 
-This application allows software engineers, developers, and professionals to input their existing resume bullet points or job experience descriptions and receive beautifully polished, high-impact, and action-oriented rewrites tailored specifically to tech industry standards.
+This repository is the **hosted** workshop fork. The original local version talks to Gemma through Ollama on `localhost:11434`. This version calls Gemini in the cloud from the Angular client, so the same app can run on `ng serve` and on Firebase Hosting.
 
 ![Resume Wording Improver Screenshot](public/screenshot.png)
 
@@ -10,55 +10,57 @@ This application allows software engineers, developers, and professionals to inp
 
 ## Key Features
 
-- **Local GenAI Processing**: Completely private, secure, and offline. Your resume data never leaves your computer, as all generations are performed locally.
-- **Factual Integrity**: Built with strict constraints that forbid the AI from exaggerating, inventing, or fabricating experience or metrics. It preserves your exact facts while putting your best foot forward.
-- **Modern Angular Architecture**: Fully designed using modern Angular best practices, including:
-  - Responsive layout built with CSS transitions and fade-in animations.
-  - Signal-based state management (`signal()`, `computed()`) for maximum efficiency.
-  - Angular's built-in template control flow (`@if` / `@else`) for elegant rendering.
-- **Structured Routing (PersonalAISpecs)**: Contains persistent instructions, workflows, and specifications structured in the `PersonalAISpecs/` directory.
+- **Firebase AI Logic**: The Angular app calls Gemini through the Firebase JS SDK. No custom backend and no Gemini API key in the client.
+- **Spark-friendly**: Uses the Gemini Developer API free tier. A Blaze (paid) plan is not required for this demo.
+- **Factual Integrity**: The model is instructed not to exaggerate, invent, or fabricate experience or metrics.
+- **Modern Angular Architecture**: Signal-based state (`signal()`) and built-in template control flow (`@if` / `@else`).
+- **Firebase Hosting ready**: Static Angular build with SPA rewrites in `firebase.json`.
 
 ---
 
 ## How It Works
 
-GemmaPoweredResumeBuilder communicates directly with [Ollama](https://ollama.com/), a local LLM runner, to execute the `gemma4` model. The frontend app sends carefully crafted prompt instructions to Ollama's local generation endpoint to ensure that your experience is polished for tech hiring managers without compromising the truth.
+The Improve Wording button sends the original bullet to Firebase AI Logic (`gemini-flash-latest`) with a system instruction that keeps the rewrite factual. Resume text **leaves the browser** and is processed by Google's Gemini API through your Firebase project.
+
+A Firebase Hosting deploy cannot call Ollama on a laptop. `localhost:11434` is the visitor's machine, not yours, and HTTPS pages cannot reliably talk to a local HTTP LLM. That is why this fork uses AI Logic.
 
 ---
 
 ## Getting Started
 
-Follow these steps to run the application locally.
-
 ### Prerequisites
 
 1. Install [Node.js](https://nodejs.org/) (v18 or newer recommended).
-2. Install [Ollama](https://ollama.com/).
-3. Pull the `gemma4` model locally on your machine:
-   ```bash
-   ollama pull gemma4
-   ```
-4. **CRITICAL REQUIREMENT**: You **MUST** ensure Ollama is actively running the `gemma4` model locally before starting the app or sending suggestions. Every time before you start the development server, run the model in your terminal:
-   ```bash
-   ollama run gemma4
-   ```
+2. A Google account and a Firebase project on the **Spark** (no-cost) plan.
+3. Register a **Web** app in that Firebase project so you have the SDK config object.
+
+### Enable Firebase AI Logic
+
+From this repository (required; skipping this causes `PERMISSION_DENIED`):
+
+```bash
+npx -y firebase-tools@latest login
+npx -y firebase-tools@latest use YOUR_PROJECT_ID
+npx -y firebase-tools@latest init ailogic
+```
+
+Choose the **Gemini Developer API**. You do not need Vertex / Agent Platform or a Blaze upgrade for this workshop.
 
 ### Installation
 
-1. Clone this repository to your local machine:
-   ```bash
-   git clone https://github.com/DeveloperMattC/GemmaPoweredResumeBuilder.git
-   cd GemmaPoweredResumeBuilder
-   ```
+```bash
+git clone https://github.com/BaronVonPerko/GemmaPoweredResumeBuilder.git
+cd GemmaPoweredResumeBuilder
+npm install
+```
 
-2. Install the package dependencies:
-   ```bash
-   npm install
-   ```
+### Add your Firebase web config
+
+Open [src/app/firebase-config.ts](src/app/firebase-config.ts) and replace the `YOUR_*` placeholders with the config from Firebase console -> Project settings -> Your apps.
+
+There is no Gemini API key to paste. AI Logic uses the public Firebase web config.
 
 ### Development Server
-
-Start a local development server:
 
 ```bash
 npm run start
@@ -66,11 +68,9 @@ npm run start
 ng serve
 ```
 
-Once the server is running, open your web browser and navigate to `http://localhost:4200/`.
+Open `http://localhost:4200/`.
 
 ### Run Unit Tests
-
-To execute unit tests using the modern [Vitest](https://vitest.dev/) test runner, run:
 
 ```bash
 npm run test
@@ -80,15 +80,22 @@ ng test
 
 ### Production Build
 
-To compile the application for production deployment, run:
-
 ```bash
 npm run build
 # or
 ng build
 ```
 
-The compiled build artifacts will be stored in the `dist/` directory.
+Output is written to `dist/GemmaPoweredResumeBuilder/browser`.
+
+### Deploy to Firebase Hosting
+
+```bash
+npm run build
+npx -y firebase-tools@latest deploy --only hosting
+```
+
+`firebase.json` already points Hosting at that browser output and rewrites unknown routes to `index.html`.
 
 ---
 

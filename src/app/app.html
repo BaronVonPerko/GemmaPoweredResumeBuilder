@@ -1,12 +1,12 @@
 <div class="container">
   <header class="app-header">
-    <div class="logo">Gemma</div>
-    <span class="badge">Resume Optimizer</span>
+    <div class="logo">Gemini</div>
+    <span class="badge">Firebase AI Logic</span>
   </header>
 
   <main class="card">
     <h1 class="card-title">Resume Wording Improver</h1>
-    <p class="card-subtitle">Elevate your resume bullet points with high-impact, professional wording suggested by local Google Gemma model.</p>
+    <p class="card-subtitle">Elevate your resume bullet points with high-impact, professional wording from Gemini via Firebase AI Logic.</p>
 
     <div class="form-group">
       <label for="original-text-input">Original Resume Bullet or Phrase</label>
@@ -38,7 +38,7 @@
     @if (loading()) {
       <div class="loader-container">
         <div class="spinner"></div>
-        <p class="status-text">Optimizing... (this may take a minute while Gemma loads)</p>
+        <p class="status-text">Optimizing with Gemini...</p>
       </div>
     } @else if (improvedText()) {
       <div class="result-container">

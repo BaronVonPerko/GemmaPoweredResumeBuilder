@@ -46,3 +46,8 @@ Thumbs.db
 # Personal AI Specifications
 /PersonalAISpecs/
 
+# Firebase
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+
